@@ -1,40 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
-import LogoUFJF from '@/components/logo';
-import CaixaTexto from '@/components/caixa-texto';
-import Rodape from '@/components/rodape';
+import { View, StyleSheet, SafeAreaView, Text } from 'react-native';
+import Quadrado from '../../components/quadrado';
+import numero from '../../components/numero';
+import React from 'react';
+import NumeroGordo from '../../components/numero';
 
-export default function TrabalhoScreen() {
-  const [dataAtual, setDataAtual] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDataAtual(new Date());
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
+export default function Index() {
   return (
     <SafeAreaView style={styles.container}>
-      <LogoUFJF />
-
-      <CaixaTexto />
-
-      <View style={styles.infoContainer}>
-        <Text style={styles.titulo}>
-          Desenvolvimento para Dispositivos Móveis
+      <View style={styles.content}>
+        <Text style={styles.title}>Testando Componente Quadrado</Text>
+        <Text style={styles.subtitle}>O quadrado deve mudar de cor ao apertar o botão:</Text>
+        <View style={styles.testArea}>
+          <Quadrado />
+        </View>
+        
+        <Text style={styles.note}>
+          Cores esperadas: Verde → Rosa → Laranja → Verde...
         </Text>
-
-        <Text style={styles.subtitulo}>
-          Thomas Chapman
-        </Text>
-
-        <Text style={styles.matricula}>
-          202476030
-        </Text>
+        <Text style={styles.title}>Testando Inflar</Text>
+        <Text style={styles.subtitle}>O numero deve aumentar ao apertar o botão:</Text>
+         <View style={styles.testArea}>
+          <NumeroGordo />
+        </View>
       </View>
-        <Rodape dataAtual = {dataAtual.toLocaleString('pt-BR')}/>
     </SafeAreaView>
   );
 }
@@ -42,35 +30,34 @@ export default function TrabalhoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#8a1219',
+    backgroundColor: '#f5f5f5',
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
+    padding: 20,
   },
-
-  infoContainer: {
-    marginTop: 30,
-    alignItems: 'center',
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#333',
   },
-
-  titulo: {
-    color: '#ffffff',
-    fontSize: 20,
-    fontWeight: '600',
-    textAlign: 'center',
-    marginBottom: 12,
-  },
-
-  subtitulo: {
-    color: '#f0f0f0',
-    fontSize: 17,
-    marginBottom: 6,
-  },
-
-  matricula: {
-    color: '#d6d6d6',
+  subtitle: {
     fontSize: 16,
-    letterSpacing: 1,
+    marginBottom: 30,
+    color: '#666',
+    textAlign: 'center',
   },
-
+  testArea: {
+    marginVertical: 20,
+    alignItems: 'center',
+  },
+  note: {
+    marginTop: 40,
+    fontSize: 14,
+    color: '#999',
+    fontStyle: 'italic',
+  },
 });
