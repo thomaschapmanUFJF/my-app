@@ -1,76 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
-import LogoUFJF from '@/components/logo';
-import CaixaTexto from '@/components/caixa-texto';
-import Rodape from '@/components/rodape';
+import { useState } from 'react';
+import { Button, StyleSheet, View } from 'react-native';
 
-export default function TrabalhoScreen() {
-  const [dataAtual, setDataAtual] = useState(new Date());
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDataAtual(new Date());
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
+export default function App() {
+  const [contador, setContador] = useState(0)
+  const cores = ["red", "green", "blue", "orange"];
+  const norm = (n: number) => {
+    return n % cores.length;
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <LogoUFJF />
-
-      <CaixaTexto />
-
-      <View style={styles.infoContainer}>
-        <Text style={styles.titulo}>
-          Desenvolvimento para Dispositivos Móveis
-        </Text>
-
-        <Text style={styles.subtitulo}>
-          Thomas Chapman
-        </Text>
-
-        <Text style={styles.matricula}>
-          202476030
-        </Text>
+    <View style={styles.container}>
+      <View style={styles.grid}>
+        <View style={[styles.square, { backgroundColor: cores[norm(contador)] }]} />
+        <View style={[styles.square, { backgroundColor: cores[norm(contador + 1)] }]} />
+        <View style={[styles.square, { backgroundColor: cores[norm(contador + 2)] }]} />
+        <View style={[styles.square, { backgroundColor: cores[norm(contador + 3)] }]} />
       </View>
-        <Rodape dataAtual = {dataAtual.toLocaleString('pt-BR')}/>
-    </SafeAreaView>
+      <Button onPress={() => contador} title={"Mudar"}></Button>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#8a1219',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
+    justifyContent: "center", // Centraliza verticalmente
+    alignItems: "center", // Centraliza horizontalmente
+    backgroundColor: "#fff",
   },
-
-  infoContainer: {
-    marginTop: 30,
-    alignItems: 'center',
+  grid: {
+    width: 160,
+    height: 160,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    alignContent: "space-between",
   },
-
-  titulo: {
-    color: '#ffffff',
-    fontSize: 20,
-    fontWeight: '600',
-    textAlign: 'center',
-    marginBottom: 12,
+  square: {
+    width: 75,
+    height: 75,
   },
-
-  subtitulo: {
-    color: '#f0f0f0',
-    fontSize: 17,
-    marginBottom: 6,
+  buttonContainer: {
+    marginTop: 20,
   },
-
-  matricula: {
-    color: '#d6d6d6',
-    fontSize: 16,
-    letterSpacing: 1,
-  },
-
 });
