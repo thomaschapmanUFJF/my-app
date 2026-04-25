@@ -1,30 +1,18 @@
-import React from "react";
+import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
-class Personagem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+export default function Personagem(){
+  const [state, setState] = useState({
       dados: {},
-      usuario: "",
-    };
-    this.fetchDados = this.fetchDados.bind(this);
-  }
-
-  fetchDados() {
-    fetch(`https://rickandmortyapi.com/api/character/1${this.state.usuario}`)
+      usuario: "1"
+    })
+  const fetchDados = () => {
+    fetch(`https://rickandmortyapi.com/api/character/${state.usuario}`)
       .then((response) => response.json())
-      .then((json) => this.setState({ dados: json }))
-      .catch((err) => this.setState({ dados: { err } }));
+      .then((json) => setState({ dados: json }))
+      .catch((err) => setState({ dados: { err } }));
   }
-
-  componentDidMount() {
-    this.fetchDados();
-  }
-
-  render() {
-    
-      const {name, status, species} = this.state.dados;
+  const {name, status, species} = state.dados;
       return (
       <View style={estilos.container}>
         <Text style={estilos.font30}>Dados do Usuario</Text>
@@ -35,14 +23,14 @@ class Personagem extends React.Component {
           <TextInput
             style={estilos.input}
             onChangeText={(usuario) => {
-              this.setState({ usuario });
+              setState(prevState => ({ ...prevState, usuario }));
             }}
-            value={this.state.usuario}
+            value={state.usuario}
           ></TextInput>
         </View>
         <View>
           <Button
-            onPress={this.fetchDados}
+            onPress={fetchDados}
             title="Buscar Dados"
             accessibilityLabel="Busque os dados do personagem do Rick and Morty"
           />
@@ -50,7 +38,6 @@ class Personagem extends React.Component {
       </View>
     );
   }
-}
 
 const estilos = StyleSheet.create({
   container: {
@@ -72,6 +59,4 @@ const estilos = StyleSheet.create({
     marginTop: 10,
   },
 });
-
-export default Personagem;
         
