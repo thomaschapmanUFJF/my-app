@@ -1,6 +1,6 @@
 import React from "react";
-import Personagem from "../../components/personagem";
+import Menus from "../../components/drawer.js";
 
 export default function App() {
-  return <Personagem />;
+  return <Menus />;
 }
