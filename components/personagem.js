@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { AppContext } from './AppContext';
 
-export default function Personagem({route}){
+export default function Personagem(){
   const { ativado } = useContext(AppContext)
   const [state, setState] = useState({
       dados: {},
