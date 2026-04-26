@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { AppContext } from './AppContext';
 
-export default function Personagem(){
+export default function Personagem({route}){
+  const { ativado } = useContext(AppContext)
   const [state, setState] = useState({
       dados: {},
       usuario: "1"
@@ -17,8 +19,14 @@ export default function Personagem(){
       <View style={estilos.container}>
         <Text style={estilos.font30}>Dados do Usuario</Text>
         <Text>Nome: {name}</Text>
+        <>
+        {ativado &&
+        <View>
         <Text>Status: {status}</Text>
         <Text>Species: {species}</Text>
+        </View>
+        }
+        </>
         <View>
           <TextInput
             style={estilos.input}

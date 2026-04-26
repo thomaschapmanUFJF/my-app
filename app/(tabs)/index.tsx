@@ -1,6 +1,10 @@
 import React from "react";
-import Menus from "../../components/drawer.js";
-
+import AppProvider from "../../components/AppContext.js";
+import Menus from "../../components/menus.js";
 export default function App() {
-  return <Menus />;
+  return (
+  <AppProvider>
+    <Menus />
+  </AppProvider>
+  );
 }

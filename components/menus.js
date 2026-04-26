@@ -1,17 +1,14 @@
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import { Text, View } from 'react-native'
+import Config from './config.js'
+import Personagem from './personagem.js'
 
 
-const TelaAPI = () => {
-    return <View><Text>TELA API</Text></View>
-}
+const Drawer = createDrawerNavigator()
 
-const TelaConfig = () => {
-    return <View><Text>TELA CONFIG</Text></View>
-}
-
+const TelaAPI = () => {return <Personagem/>}
+const TelaConfig = () => {return <Config />}
 export default function Menus(){
-    const Drawer = createDrawerNavigator()
+
     return (
         <Drawer.Navigator>
             <Drawer.Screen
